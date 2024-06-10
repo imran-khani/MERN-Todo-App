@@ -18,7 +18,7 @@ const Navbar = () => {
     >
       <div className="flex justify-between container h-[45px]">
         <Link to={"/"} className="flex gap-x-5 justify-center items-center">
-          <img src="icon.svg" alt="logo" />
+          <img src={isHome ? 'icon.svg' : 'iconApp.svg'} alt="logo" />
           <h1 className="text-Primary md:text-subheading text-xl font-bold">
             Todo Daily
           </h1>

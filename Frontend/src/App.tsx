@@ -1,7 +1,10 @@
+// App.jsx
 import "./styles/App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./Layout/RootLayout.tsx";
 import Homepage from "./pages/Homepage.tsx";
+import AppLayout from "./Layout/AppLayout.tsx";
+import {SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
 
 const router = createBrowserRouter([
   {
@@ -9,17 +12,23 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-         path: "/",
+        path: "/",
         element: <Homepage />,
-
-
-      }
-    ]
+      },
+    ],
   },
-  // {
-  //   path: "/app",
-  //   element: <AppLayout />,
-  // }
+  {
+    path: "/app",
+    element: <AppLayout />,
+  },
+  {
+    path: "/sign-in/*",
+    element: (
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
+    ),
+  },
 ]);
 
 const App = () => {
