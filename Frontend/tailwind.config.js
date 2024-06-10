@@ -14,8 +14,8 @@ export default {
         Primary: "#FF4F5A",
       },
       fontSize: {
-        "text-heading": "48px",
-        "text-subheading": "36px",
+        "heading": "48px",
+        "subheading": "36px",
       },
     },
   },
