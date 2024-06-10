@@ -19,9 +19,26 @@ const Homepage = () => {
         alt="home image"
       />
       <div className="mt-[120px] max-w-screen-lg flex flex-col">
-        <h2 className="font-bold text-subheading md:mb-[115px] mb-10 text-center">Don't Let Your Day doing nothing</h2>
+        <h2 className="font-bold text-subheading md:mb-[115px] mb-10 text-center">
+          Don't Let Your Day doing nothing
+        </h2>
         <div className="flex md:flex-row flex-col justify-between items-center">
           <HomeIcon />
+        </div>
+      </div>
+
+      <div className="flex md:flex-row flex-col justify-between items-center py-24">
+        <img src="" alt="img" />
+        <div className="flex flex-col">
+          <h3 className="text-heading font-bold ">
+            Achieve your target and won your life
+          </h3>
+          <Link
+            to="/app"
+            className="bg-Primary text-white px-8 md:py-3 py-2 rounded-md mt-8 block mx-auto max-w-[200px] text-center"
+          >
+            Get started
+          </Link>
         </div>
       </div>
     </div>
