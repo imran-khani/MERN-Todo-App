@@ -4,32 +4,44 @@ import {
   SignUpButton,
   SignedIn,
   SignedOut,
+  UserButton,
+  useAuth,
 } from "@clerk/clerk-react";
 import { Link, useLocation } from "react-router-dom";
+import { cn } from "../../utils/utils";
 
 const Navbar = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
+  const {} = useAuth();
   return (
     <nav
       className={`${
-        isHome ? "md:pt-24 pt-10" : "w-full bg-Primary text-white"
+        isHome ? "md:pt-24 pt-10" : "w-full bg-Primary text-white py-2"
       }`}
     >
-      <div className="flex justify-between container h-[45px]">
+      <div
+        className={cn(
+          "flex justify-between h-[45px]",
+          isHome ? "container" : "px-20"
+        )}
+      >
         <Link to={"/"} className="flex gap-x-5 justify-center items-center">
-          <img src={isHome ? 'icon.svg' : 'iconApp.svg'} alt="logo" />
+          <img src={isHome ? "icon.svg" : "iconApp.svg"} alt="logo" />
           <h1 className="text-Primary md:text-subheading text-xl font-bold">
             Todo Daily
           </h1>
         </Link>
-        <div className="flex gap-x-5 text-Primary">
+        <div
+          className={cn("flex gap-x-5", isHome ? "text-Primary" : "text-white")}
+        >
           <SignedOut>
             <SignInButton />
             <SignUpButton />
           </SignedOut>
           <SignedIn>
-            <SignOutButton />
+            <SignOutButton redirectUrl="/" />
+            <UserButton />
           </SignedIn>
         </div>
       </div>

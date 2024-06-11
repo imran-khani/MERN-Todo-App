@@ -4,15 +4,6 @@ import Footer from "../components/Footer";
 
 const AppLayout = () => {
   const path = useLocation().pathname;
-  const navigate = useNavigate();
-
-//   const {isSignedIn} = useAuth();
-   
-//     if(!isSignedIn) navigate("/");
-
-
- // cleark auth
-
    
   const isHome = path === "/";
 
