@@ -1,6 +1,6 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer";
+import Sidebar from "../components/Sidebar/Sidebar";
 
 const AppLayout = () => {
   const path = useLocation().pathname;
@@ -10,10 +10,10 @@ const AppLayout = () => {
   return (
     <div className={`flex flex-col min-h-screen ${isHome ? "container" : ""}`}>
       <Navbar />
+      <Sidebar />
       <main className="flex-1">
         <Outlet />
       </main>
-      <Footer />
     </div>
   );
 };

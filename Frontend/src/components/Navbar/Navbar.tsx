@@ -23,7 +23,7 @@ const Navbar = () => {
       <div
         className={cn(
           "flex justify-between h-[45px]",
-          isHome ? "container" : "px-20"
+          isHome ? "container" : "md:px-20 px-5"
         )}
       >
         <Link to={"/"} className="flex gap-x-5 justify-center items-center">

@@ -22,6 +22,12 @@ const App = () => {
     {
       path: "/app",
       element: isSignedIn ? <AppLayout /> : <RedirectToSignIn />,
+      children:[ 
+        {
+          path: "/",
+          element: <Homepage />,
+        },
+      ]
     },
     {
       path: "/sign-in/*",
