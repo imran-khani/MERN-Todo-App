@@ -20,14 +20,11 @@ const App = () => {
       ],
     },
     {
-      path: "/app",
+      path: "/app/all",
       element: isSignedIn ? <AppLayout /> : <RedirectToSignIn />,
-      children: [
-        {
-          path: "/",
-          element: <Homepage />,
-        },
-      ],
+      children:[
+        // todo routes
+      ]
     },
     {
       path: "/sign-in/*",

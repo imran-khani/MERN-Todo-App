@@ -28,7 +28,10 @@ const Navbar = () => {
       >
         <Link to={"/"} className="flex gap-x-5 justify-center items-center">
           <img src={isHome ? "icon.svg" : "iconApp.svg"} alt="logo" />
-          <h1 className="text-Primary md:text-subheading text-xl font-bold">
+          <h1 className={cn(
+            "text-Primary md:text-subheading text-xl font-bold",
+            isHome ? 'text-gray-900' : 'text-white'
+          )}>
             Todo Daily
           </h1>
         </Link>

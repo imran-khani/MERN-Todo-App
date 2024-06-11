@@ -8,7 +8,7 @@ const Homepage = () => {
       <h1 className="md:text-heading text-3xl leading-snug font-bold max-w-[400px] md:max-w-[600px] text-center mx-auto">
         Organizing your day activities with Todo Daily
       </h1>
-      <Link to="/app">
+      <Link to="/app/all">
        <Button>Get started</Button>
       </Link>
       <img
