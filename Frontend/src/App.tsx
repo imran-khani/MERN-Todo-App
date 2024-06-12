@@ -5,6 +5,7 @@ import RootLayout from "./Layout/RootLayout.tsx";
 import Homepage from "./pages/Homepage.tsx";
 import AppLayout from "./Layout/AppLayout.tsx";
 import { SignedOut, RedirectToSignIn, useAuth } from "@clerk/clerk-react";
+import AllTodos from "./pages/AllTodos.tsx";
 
 const App = () => {
   const { isSignedIn } = useAuth();
@@ -20,10 +21,13 @@ const App = () => {
       ],
     },
     {
-      path: "/app/all",
+      path: "/app",
       element: isSignedIn ? <AppLayout /> : <RedirectToSignIn />,
       children:[
-        // todo routes
+        {
+          path:'/app/all',
+          element: <AllTodos />
+        }
       ]
     },
     {

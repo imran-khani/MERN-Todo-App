@@ -11,7 +11,7 @@ const AppLayout = () => {
     <div className={`flex flex-col min-h-screen ${isHome ? "container" : ""}`}>
       <Navbar />
       <Sidebar />
-      <main className="flex-1">
+      <main className="flex-1 md:pl-[310px]">
         <Outlet />
       </main>
     </div>

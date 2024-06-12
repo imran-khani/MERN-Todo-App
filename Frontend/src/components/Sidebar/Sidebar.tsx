@@ -1,30 +1,35 @@
-import { Menu, X } from "lucide-react";
+import { BookCheck, Calendar, CalendarClock, Menu, X } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "../../utils/utils";
 
-const routes = useMemo(
-  () => [
-    {
-      id: 1,
-      path: "/app/all",
-      label: "All Tasks",
-    },
-    {
-      id: 2,
-      path: "/app/today",
-      label: "Home",
-    },
-    {
-      id: 3,
-      path: "/app/yesterday",
-      label: "About",
-    },
-  ],
-  []
-);
+
 
 const Sidebar = () => {
+
+  const routes = useMemo(
+    () => [
+      {
+        id: 1,
+        path: "/app/all",
+        label: "All Tasks",
+        icon: <BookCheck />
+      },
+      {
+        id: 2,
+        path: "/app/today",
+        label: "Today",
+        icon: <Calendar />
+      },
+      {
+        id: 3,
+        path: "/app/yesterday",
+        label: "Yesterday",
+        icon: <CalendarClock />
+      },
+    ],
+    []
+  );
   const [isOpen, setIsOpen] = useState(true);
   const path = useLocation().pathname;
 
@@ -53,7 +58,7 @@ const Sidebar = () => {
       </div>
       <div
         className={cn(
-          "flex-col md:w-[306px] fixed top-[63px] w-[200px] transition transform md:translate-x-0 -translate-x-full h-screen bg-gray-200",
+          "flex-col md:w-[306px] z-50 fixed top-[63px] w-[200px] transition transform md:translate-x-0 -translate-x-full h-screen bg-gray-200",
           isOpen ? "translate-x-0" : ""
         )}
       >
@@ -61,7 +66,7 @@ const Sidebar = () => {
           <div className="absolute right-2 top-2 flex md:hidden">
             <X
               onClick={handleCloseClick}
-              className="text-white cursor-pointer"
+              className="text-gray-900 cursor-pointer"
               size={24}
             />
           </div>
@@ -77,7 +82,11 @@ const Sidebar = () => {
                       isActive ? "text-Primary" : "text-gray-900"
                     )}
                   >
-                    {route.label}
+                    <div className="flex gap-2 items-center">
+                      {route.icon}
+                      <span>{route.label}</span>
+                    </div>
+                  
                   </Link>
                 </li>
               );

@@ -1,23 +1,22 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const TodoSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true, // Ensures that the title field is mandatory
-      trim: true, // Removes whitespace from both ends of the string
+      required: true,
+      trim: true,
     },
     isCompleted: {
       type: Boolean,
-      default: false, // Default value is false
+      default: false,
     },
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // Reference to the User model
+    userId: {
+      type: String,
       required: true,
     },
   },
-  { timestamps: true } // Automatically adds createdAt and updatedAt fields
+  { timestamps: true }
 );
 
-export const Todo = mongoose.model("Todo", TodoSchema);
+export const Todo = mongoose.model('Todo', TodoSchema);

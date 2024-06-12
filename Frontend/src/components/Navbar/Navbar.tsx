@@ -1,11 +1,10 @@
 import {
   SignInButton,
-  SignOutButton,
   SignUpButton,
   SignedIn,
   SignedOut,
   UserButton,
-  useAuth,
+  useUser,
 } from "@clerk/clerk-react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "../../utils/utils";
@@ -13,7 +12,7 @@ import { cn } from "../../utils/utils";
 const Navbar = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
-  const {} = useAuth();
+  const { user } = useUser();
   return (
     <nav
       className={`${
@@ -23,15 +22,17 @@ const Navbar = () => {
       <div
         className={cn(
           "flex justify-between h-[45px]",
-          isHome ? "container" : "md:px-20 px-5"
+          isHome ? "container" : "md:px-10 px-5"
         )}
       >
         <Link to={"/"} className="flex gap-x-5 justify-center items-center">
-          <img src={isHome ? "icon.svg" : "iconApp.svg"} alt="logo" />
-          <h1 className={cn(
-            "text-Primary md:text-subheading text-xl font-bold",
-            isHome ? 'text-gray-900' : 'text-white'
-          )}>
+          <img src={isHome ? "icon.svg" : "/iconApp.svg"} alt="logo" />
+          <h1
+            className={cn(
+              "text-Primary md:text-subheading text-xl font-bold",
+              isHome ? "text-gray-900" : "text-white"
+            )}
+          >
             Todo Daily
           </h1>
         </Link>
@@ -43,8 +44,12 @@ const Navbar = () => {
             <SignUpButton />
           </SignedOut>
           <SignedIn>
-            <SignOutButton redirectUrl="/" />
-            <UserButton />
+            <div className="flex items-center gap-x-2">
+              <span>
+                welcome, <strong>{user?.firstName}</strong>
+              </span>
+              <UserButton />
+            </div>
           </SignedIn>
         </div>
       </div>

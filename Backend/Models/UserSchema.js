@@ -1,11 +1,15 @@
+import mongoose from 'mongoose';
 
- import mongoose from 'mongoose';
+const UserSchema = new mongoose.Schema({
+  clerkId: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+   name: {
+    type: String,
+    required: true,
+   }
+});
 
-    const UserSchema = new mongoose.Schema({
-        userId: {
-            type: String,
-            required: true,
-            unique: true
-        },
-    })
-    export const User = mongoose.model('User', UserSchema);
+export const User = mongoose.model('User', UserSchema);

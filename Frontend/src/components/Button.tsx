@@ -8,7 +8,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        home: "bg-Primary text-subheading text-white px-8 md:py-3 py-2 rounded-md mt-8 block mx-auto max-w-[200px] text-center",
+        home: "bg-Primary text-subheading text-white px-8 md:py-3 py-2 rounded-md text-center",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
