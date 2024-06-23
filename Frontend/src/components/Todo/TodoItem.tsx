@@ -7,7 +7,7 @@ type Todo = {
   todo: {
     _id: string;
     userId: string;
-    title: string;
+    text: string;
     isCompleted: boolean;
   };
 };
@@ -58,7 +58,7 @@ const TodoItem: React.FC<Todo> = ({ todo }) => {
           isChecked ? "line-through" : ""
         }`}
       >
-        {todo.title}
+        {todo.text}
       </h1>
     </div>
   );

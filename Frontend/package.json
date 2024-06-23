@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.2.3",
+    "@clerk/clerk-sdk-node": "^5.0.12",
     "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

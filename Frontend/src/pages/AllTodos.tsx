@@ -10,7 +10,7 @@ import TodoItem from "../components/Todo/TodoItem";
 export type Todo = {
   _id: string;
   userId: string;
-  title: string;
+  text: string;
   isCompleted: boolean;
 };
 
@@ -18,57 +18,24 @@ const AllTodos = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [showForm, setShowForm] = useState<boolean>(false);
-
-  const { userId, getToken } = useAuth();
+  const { getToken } = useAuth();
   const { user } = useUser();
 
-  const createUser = async () => {
-    try {
-      const token = await getToken();
-      await axios.post(
-        "http://localhost:5000/users",
-        { clerkId: userId, name: user?.fullName },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-    } catch (error) {
-      console.error("Error creating user:", error);
+  useEffect(() => {
+    if (user) {
+      fetchTodos();
     }
-  };
-
-  const addTodo = async (title: string) => {
-    try {
-      const token = await getToken();
-      const { data } = await axios.post(
-        "http://localhost:5000/todos",
-        { userId, title },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setTodos((prevTodos) => [...prevTodos, data]);
-    } catch (error) {
-      console.error("Error adding todo:", error);
-    }
-  };
+  }, [user]);
 
   const fetchTodos = async () => {
     try {
       setLoading(true);
       const token = await getToken();
-      const response = await axios.get(
-        `http://localhost:5000/todos/${userId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get("http://localhost:5000/todos", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setTodos(response.data);
     } catch (error) {
       console.error("Error fetching todos:", error);
@@ -77,42 +44,53 @@ const AllTodos = () => {
     }
   };
 
-  useEffect(() => {
-    if (userId) {
-      createUser();
-      fetchTodos();
+  const addTodo = async (text: string) => {
+    setLoading(true);
+    try {
+      const token = await getToken();
+      const response = await axios.post(
+        "http://localhost:5000/todos",
+        { text },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setTodos([...todos, response.data]);
+    } catch (error) {
+      console.error("Error adding todo:", error);
+    } finally {
+      setLoading(false);
+      setShowForm(false);
     }
-  }, [userId]);
+  };
 
   return (
-    <>
-      <div className="px-4">
-        <div className="flex items-center justify-between">
-          <h1 className="text-Primary text-2xl md:text-heading py-5">
-            All Tasks
-          </h1>
-          {!showForm && (
-            <Button onClick={() => setShowForm(true)} className="md:mr-20">
-              <PlusCircle size={24} className="text-white" />
-            </Button>
-          )}
-        </div>
-        <div className="flex justify-between items-center">
-          {showForm && <TodoForm addTodo={addTodo} />}
-        </div>
-        {loading ? (
-          <div>Loading...</div>
-        ) : todos.length === 0 ? (
-          <EmptyState noData={true} setShowForm={setShowForm} />
-        ) : (
-          <div className="flex flex-col">
-            {todos.map((todo) => (
-              <TodoItem key={todo._id} todo={todo} />
-            ))}
-          </div>
+    <div className="px-4">
+      <div className="flex items-center justify-between">
+        <h1 className="text-Primary text-2xl md:text-heading py-5">All Tasks</h1>
+        {!showForm && (
+          <Button onClick={() => setShowForm(true)} className="md:mr-20">
+            <PlusCircle size={24} className="text-white" />
+          </Button>
         )}
       </div>
-    </>
+      <div className="flex justify-between items-center">
+        {showForm && <TodoForm addTodo={addTodo} />}
+      </div>
+      {loading ? (
+        <div>Loading...</div>
+      ) : todos.length === 0 ? (
+        <EmptyState noData={true} setShowForm={setShowForm} />
+      ) : (
+        <div className="flex flex-col">
+          {todos.map((todo) => (
+            <TodoItem key={todo._id} todo={todo} />
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 
